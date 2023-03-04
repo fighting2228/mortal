@@ -1,5 +1,11 @@
 import pygame.image
 
+start_image = pygame.image.load('image/fon/start (1).png').convert_alpha()
+exit_image = pygame.image.load('image/fon/exit (1).png').convert_alpha()
+menu_image = pygame.image.load('image/fon/fon.png').convert_alpha()
+win1_image = pygame.image.load('image/fon/win1.png').convert_alpha()
+win2_image = pygame.image.load('image/fon/win2.png').convert_alpha()
+
 player1_idle = [
            pygame.image.load('image/player 1/idle/1.png').convert_alpha(),
            pygame.image.load('image/player 1/idle/2.png').convert_alpha(),

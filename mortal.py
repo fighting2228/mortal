@@ -3,6 +3,7 @@ import os
 import sys
 import random
 
+
 pygame.init()
 current_path = os.path.dirname(__file__)
 os.chdir(current_path)
@@ -11,9 +12,30 @@ HEIGHT = 600
 FPS = 60
 sc = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
+lvl = 'menu'
 from load import *
 
 
+
+def startMenu():
+    global lvl
+    sc.blit(menu_image, (0, 0))
+    sc.blit(start_image, (100, 200))
+
+    sc.blit(exit_image, (100, 400))
+    pos_mouse = pygame.mouse.get_pos()
+    if pygame.mouse.get_pressed()[0]:
+        if 100 < pos_mouse[0] < 400:
+            if 200 < pos_mouse[1] < 275:
+                print('кнопка старта игры')
+                lvl = 'game'
+            elif 300 < pos_mouse[1] < 375:
+                print('кнопка меню рекордов')
+            elif 400 < pos_mouse[1] < 475:
+                print('кнопка выхода из игры')
+                pygame.quit()
+                sys.exit()
+    pygame.display.update()
 class FOТ():
     def __init__(self):
         self.timer = 0
@@ -75,6 +97,7 @@ class Player(pygame.sprite.Sprite):
             self.hp_bar = "red"
 
     def update(self, enemy):
+        global lvl
         if self.rect.center[0] - enemy.rect.center[0] < 0:
             self.dir = "right"
         else:
@@ -156,6 +179,9 @@ class Player(pygame.sprite.Sprite):
             if self.anime_atk and self.flag_damage:
                 enemy.hp -= 10
                 self.flag_damage = False
+        if self.hp <= 0:
+            lvl = 'win'
+
 
 
 def restart():
@@ -186,5 +212,16 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-    game()
+    if lvl == 'game':
+        game()
+    elif lvl == "menu":
+        startMenu()
+    elif lvl == 'win':
+        if player_1.hp <= 0:
+            sc.blit(win2_image , (0,0))
+        else:
+            sc.fill("black")
+            sc.blit(win1_image , (350,200))
+        pygame.display.update()
+
     clock.tick(FPS)
