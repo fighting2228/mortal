@@ -119,7 +119,7 @@ class Player(pygame.sprite.Sprite):
             if not self.anime_atk:
                 self.anime_run = True
         else:
-            if not self.anime_atk:
+            if not self.anime_atk and not self.gigapower:
                 self.anime_idle = True
             self.anime_run = False
 
@@ -139,12 +139,15 @@ class Player(pygame.sprite.Sprite):
             self.anime_idle = False
             self.anime_run = False
             self.flag_damage = True
-            self.gigapower += 1
         self.timer_anime += 2
 
         if self.timer_anime / FPS > 0.1:
             if self.frame == len(self.current_list_image) - 1:
                 self.frame = 0
+                if self.gigapower:
+                    self.current_list_image = player1_idle
+                    self.gigapower = False
+                    self.anime_idle = True
                 if self.anime_atk:
                     self.current_list_image = player1_idle
                     self.anime_atk = False
@@ -152,43 +155,9 @@ class Player(pygame.sprite.Sprite):
             else:
                 self.frame += 1
             self.timer_anime = 0
-        if self.anime_idle:
-            self.current_list_image = self.image_lists[0]
-        elif self.anime_run:
-            self.current_list_image = self.image_lists[1]
-        elif self.anime_atk:
-            self.current_list_image = self.image_lists[2]
-        try:
-            if self.dir == "right":
-                self.image = self.current_list_image[self.frame]
-            else:
-                self.image = pygame.transform.flip(self.current_list_image[self.frame], True, False)
-        except:
-            self.frame = 0
 
-            if self.hp_bar == "red":
-                pygame.draw.rect(sc, self.hp_bar, (600 + (600 - self.hp * 6), 0, 600, 50))
-            else:
-                pygame.draw.rect(sc, self.hp_bar, (0, 0, 600 * self.hp / 100, 50))
-
-            self.mask = pygame.mask.from_surface(self.image)
-            self.mask_outline = self.mask.outline()
-            self.mask_list = []
-
-            for i in self.mask_outline:
-                self.mask_list.append((i[0] + self.rect.x, i[1] + self.rect.y))
-            if len(set(self.mask_list) & set(enemy.mask_list)) > 0:
-                if self.gigapower > 20 and self.flag_damage:
-                    enemy.hp -= 50
-                    self.gigapower = 0
-                    self.flag_damage = False
-                if self.anime_atk and self.flag_damage:
-                    enemy.hp -= 10
-                    self.flag_damage = False
-            if self.hp <= 0:
-                lvl = 'win'
-
-        if key[self.controls[4]] and not self.anime_atk:
+        print(self.anime_atk,self.anime_idle,self.anime_run,self.gigapower)
+        if key[self.controls[4]] and not self.gigapower:
             self.frame = 0
             self.anime_atk = False
             self.anime_idle = False
@@ -198,16 +167,7 @@ class Player(pygame.sprite.Sprite):
             self.gigapower = True
         self.timer_anime += 2
 
-        if self.timer_anime / FPS > 0.1:
-            if self.frame == len(self.current_list_image) - 1:
-                self.frame = 0
-                if self.anime_atk:
-                    self.current_list_image = player1_idle
-                    self.anime_atk = False
-                    self.anime_idle = True
-            else:
-                self.frame += 1
-            self.timer_anime = 0
+
         if self.anime_idle:
             self.current_list_image = self.image_lists[0]
         elif self.anime_run:
@@ -240,7 +200,7 @@ class Player(pygame.sprite.Sprite):
         if len(set(self.mask_list) & set(enemy.mask_list)) > 0:
             if self.gigapower == True and self.flag_damage2 == True:
                 enemy.hp -= 50
-                self.gigapower = 0
+
                 self.flag_damage = False
             if self.anime_atk and self.flag_damage:
                 enemy.hp -= 10

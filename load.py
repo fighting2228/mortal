@@ -103,3 +103,34 @@ fon_image = [pygame.image.load('image/fon/1.jpg').convert_alpha(),
              pygame.image.load('image/fon/7.jpg').convert_alpha(),
              pygame.image.load('image/fon/8.jpg').convert_alpha(),
              ]
+
+player3_idle = [pygame.image.load('image/player 3/01_idle/idle_1.png').convert_alpha(),
+                pygame.image.load('image/player 3/01_idle/idle_2.png').convert_alpha(),
+                pygame.image.load('image/player 3/01_idle/idle_3.png').convert_alpha(),
+                pygame.image.load('image/player 3/01_idle/idle_4.png').convert_alpha(),
+                pygame.image.load('image/player 3/01_idle/idle_5.png').convert_alpha(),
+                pygame.image.load('image/player 3/01_idle/idle_6.png').convert_alpha(),
+                pygame.image.load('image/player 3/01_idle/idle_7.png').convert_alpha(),
+                pygame.image.load('image/player 3/01_idle/idle_8.png').convert_alpha(),
+                ]
+
+player3_attack=[pygame.image.load('image/player 3/07_1_atk/1_atk_1.png').convert_alpha(),
+                pygame.image.load('image/player 3/07_1_atk/1_atk_2.png').convert_alpha(),
+                pygame.image.load('image/player 3/07_1_atk/1_atk_3.png').convert_alpha(),
+                pygame.image.load('image/player 3/07_1_atk/1_atk_4.png').convert_alpha(),
+                pygame.image.load('image/player 3/07_1_atk/1_atk_5.png').convert_alpha(),
+                pygame.image.load('image/player 3/07_1_atk/1_atk_6.png').convert_alpha(),
+                pygame.image.load('image/player 3/07_1_atk/1_atk_7.png').convert_alpha(),
+                ]
+
+player3_run  = [pygame.image.load('image/player 3/02_walk/walk_1.png').convert_alpha(),
+                pygame.image.load('image/player 3/02_walk/walk_2.png').convert_alpha(),
+                pygame.image.load('image/player 3/02_walk/walk_3.png').convert_alpha(),
+                pygame.image.load('image/player 3/02_walk/walk_4.png').convert_alpha(),
+                pygame.image.load('image/player 3/02_walk/walk_5.png').convert_alpha(),
+                pygame.image.load('image/player 3/02_walk/walk_6.png').convert_alpha(),
+                pygame.image.load('image/player 3/02_walk/walk_7.png').convert_alpha(),
+                pygame.image.load('image/player 3/02_walk/walk_8.png').convert_alpha(),
+                pygame.image.load('image/player 3/02_walk/walk_9.png').convert_alpha(),
+                pygame.image.load('image/player 3/02_walk/walk_10.png').convert_alpha(),
+                ]
